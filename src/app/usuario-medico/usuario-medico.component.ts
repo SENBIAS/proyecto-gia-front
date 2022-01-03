@@ -24,5 +24,6 @@ export class UsuarioMedicoComponent implements OnInit {
     })
    
   }
+  
 
 }
