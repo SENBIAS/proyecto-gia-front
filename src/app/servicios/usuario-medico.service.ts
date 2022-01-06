@@ -11,4 +11,16 @@ export class UsuarioMedicoService {
   public recibirUsuarios(){
     return this.http.get<any>("http://localhost:8080/usuarioMedico/mostrarTodos");
   }
+
+  public agregarMedico(medico: any){
+    return this.http.post<any>("http://localhost:8080/usuarioMedico",medico);
+  }
+
+  public eliminarMedico(idMedico: number){
+    return this.http.delete<any>("http://localhost:8080/usuarioMedico?id="+idMedico);
+  }
+  
+  public actualizarMedico(medico: any){
+    return this.http.put<any>("http://localhost:8080/usuarioMedico", medico);
+  }
 }

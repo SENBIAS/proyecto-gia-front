@@ -11,8 +11,7 @@
 <div class="card">
     <p-table responsiveLayout="scroll" [value]="usuariosPacientes">
         <ng-template pTemplate="caption">
-            <button pButton pRipple (click)="activarAgregar()" type="button" label="Añardir Paciente" class="p-button-rounded p-button-success"></button>
-        
+        <button pButton pRipple (click)="activarAgregar()" type="button" label="Añardir Paciente" class="p-button-rounded p-button-success"></button>
         <p-dialog header="Agregar paciente" [(visible)]="agregar" [modal]="true" [style]="{width: '50vw'}" [maximizable]="true"
             [draggable]="false" [resizable]="false">
                 <form [formGroup]="formUsuario" (ngSubmit)="agregarUsuario()">
@@ -109,10 +108,19 @@
                 <td >{{usuariosPacientes.estadoCivil}}</td>
                 <td>
                     <button pButton pRipple (click)="showBasicDialog2(usuariosPacientes)" type="button" icon="pi pi-user" class="p-button-rounded p-button-info"></button>
-                    <button pButton pRipple type="button" icon="pi pi-bookmark" class="p-button-rounded p-button-secondary"></button>
+                    <button pButton pRipple (click)="enviarMensajeHistoria(usuariosPacientes)"type="button" icon="pi pi-bookmark" class="p-button-rounded p-button-secondary"></button>
                     <button pButton pRipple (click)="eliminarUsuario(usuariosPacientes.idPaciente)" type="button" icon="pi pi-times" class="p-button-rounded p-button-danger"></button>
                 </td>
             </tr>
+
+            <p-dialog header="Historia clinica: {{usuario?.nombre}} {{usuario?.apellido}}" [(visible)]="historiaClinicaVer" [modal]="true" [style]="{width: '50vw'}" [maximizable]="true"
+            [draggable]="false" [resizable]="false">
+                <app-historia-clinica [idPaciente]="idPaciente"></app-historia-clinica>
+                <ng-template pTemplate="footer">
+                    <p-button icon="pi pi-times" (click)="refresh()" (click)="historiaClinicaVer=false" label="Cerrar"></p-button>
+                </ng-template>
+            </p-dialog>
+
             <p-dialog header="Paciente: {{usuario?.nombre}} {{usuario?.apellido}}" [(visible)]="displayBasic2" [modal]="true" [style]="{width: '50vw'}" [maximizable]="true"
             [draggable]="false" [resizable]="false">
                 <form [formGroup]="formUsuario" (ngSubmit)="actualizarUsuario()">
@@ -155,7 +163,7 @@
                         <br>
                         <div class="p-field p-col-12 p-md-4">
                             <span class="p-float-label">
-                                <p-dropdown formControlName="estadoCivil" [options]="estadoCivil"[showClear]="true"></p-dropdown>
+                                <p-dropdown formControlName="estadoCivil" [options]="estadoCivil" [showClear]="true"></p-dropdown>
                                 <label for="inputtext">Estado civil</label>
                             </span>
                         </div>
@@ -178,7 +186,7 @@
                 </form>
                 <ng-template pTemplate="footer">
                     
-                    <p-button icon="pi pi-times" (click)="displayBasic2=false" label="Cerrar"></p-button>
+                    <p-button icon="pi pi-times" (click)="refresh()" (click)="displayBasic2=false" label="Cerrar"></p-button>
                 </ng-template>
             </p-dialog>
         </ng-template>

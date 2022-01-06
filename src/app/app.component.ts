@@ -7,4 +7,25 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'proyecto-gia';
+
+  public activarP: boolean = true;
+  public activarM: boolean = true;
+
+  activarPaciente(){
+    if(this.activarP === false){
+      this.activarP = true;
+      this.activarM = false;
+    }else{
+      this.activarP = false;
+    }
+  }
+
+  activarMedico(){
+    if(this.activarM === false){
+      this.activarM = true;
+      this.activarP = false;
+    }else{
+      this.activarM = false;
+    }
+  }
 }

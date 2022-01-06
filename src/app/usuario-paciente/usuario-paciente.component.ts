@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { usuarioPacientes } from '../model/usuarioPaciente';
 import { UsuarioPacienteService } from '../servicios/usuario-paciente.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Subscription } from 'rxjs';
+
 
 @Component({
   selector: 'app-usuario-paciente',
@@ -11,7 +11,8 @@ import { Subscription } from 'rxjs';
 })
 export class UsuarioPacienteComponent implements OnInit {
 
-  
+  public idPaciente: number | undefined;
+  public historiaClinicaVer:boolean = false;
   public displayBasic2: boolean = false;
   public numero:number |undefined;
   public usuariosPacientes: Array<usuarioPacientes> = new Array();
@@ -44,10 +45,19 @@ export class UsuarioPacienteComponent implements OnInit {
 
   ngOnInit(): void {
     this.recibirUsuarios();
-
+     
   }
   
+  verHistoriaClinica(){
+    this.historiaClinicaVer = true;
+  }
   
+  enviarMensajeHistoria(usuario: usuarioPacientes){
+    this.idPaciente = usuario.idPaciente;
+    console.log(this.idPaciente);
+    this.verHistoriaClinica();
+  }
+
   actualizarUsuario(){
     let nombre = this.formUsuario.get("nombre")?.value;
     let apellido = this.formUsuario.get("apellido")?.value;
@@ -153,14 +163,12 @@ export class UsuarioPacienteComponent implements OnInit {
       console.log(respuesta);
     })
     console.log(persona);
-    
-    
+  
   }
 
   recibirUsuarios(){
     this.serviceUsuarioPaciente.recibirUsuarios().subscribe(respuesta => {
       this.usuariosPacientes = respuesta;
-      console.log(this.usuariosPacientes);
     })
   }
 

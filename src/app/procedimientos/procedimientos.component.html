@@ -1,0 +1,20 @@
+<form [formGroup]="formProcedimientos">
+    <div class="p-fluid p-grid">
+        <br>
+        <div class="p-field p-col-12 p-md-4">
+            <span class="p-float-label">
+                <input type="text" formControlName="descripcion" id="inputtext" pInputText> 
+                <label >Descripcion procedimiento</label>
+            </span>
+        </div>
+        <br>
+        <div class="p-field p-col-12 p-md-4">
+            <span class="p-float-label">
+                <input type="text" formControlName="tipoProcedimiento" id="inputtext" pInputText> 
+                <label for="inputtext">Tipo procedimiento</label>
+            </span>
+        </div> 
+    </div>
+    <br>
+    <button pButton pRipple label="Save" icon="pi pi-check"></button>
+</form>

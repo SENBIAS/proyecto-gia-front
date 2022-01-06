@@ -8,14 +8,20 @@
 </head>
 <body>
 
-
-    usuario-medico
-    <app-usuario-medico></app-usuario-medico>
-
-
-    usuario-paciente
-    <app-usuario-paciente></app-usuario-paciente>
-
+    <h5>PROGRAMA HISTORIAS CLINICAS</h5>
+<div class="p-py-3">
+    <p-button (click)="activarMedico()" styleClass="p-button-text p-ml-2" label="Medicos"></p-button>
+    <p-button (click)="activarPaciente()" styleClass="p-button-text" label="Pacientes"></p-button>
+</div>
+    
+<p-accordion>
+    <p-accordionTab header="Medicos" [(selected)]="activarM">
+        <app-usuario-medico></app-usuario-medico>
+    </p-accordionTab>
+    <p-accordionTab header="Pacientes" [(selected)]="activarP">
+        <app-usuario-paciente></app-usuario-paciente>
+    </p-accordionTab>
+</p-accordion>
 </body>
 </html>
 

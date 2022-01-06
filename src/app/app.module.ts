@@ -23,12 +23,20 @@ import { MultiSelectModule } from "primeng/multiselect";
 import { InputTextareaModule } from "primeng/inputtextarea";
 import { InputTextModule } from "primeng/inputtext";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HistoriaClinicaComponent } from './historia-clinica/historia-clinica.component';
+import { ProcedimientosComponent } from './procedimientos/procedimientos.component';
+import { EnfermedadPacienteComponent } from './enfermedad-paciente/enfermedad-paciente.component';
+import { EnfermedadHereditariaComponent } from './enfermedad-hereditaria/enfermedad-hereditaria.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UsuarioMedicoComponent,
     UsuarioPacienteComponent,
+    HistoriaClinicaComponent,
+    ProcedimientosComponent,
+    EnfermedadPacienteComponent,
+    EnfermedadHereditariaComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,2 +1,189 @@
-
-
+<div class="card">
+    <p-table responsiveLayout="scroll" [value]="usuariosMedicos">
+        <ng-template pTemplate="caption">
+        <button pButton pRipple (click)="activarAgregar()" type="button" label="Añardir Medico" class="p-button-rounded p-button-success"></button>
+        
+        <p-dialog header="Agregar medico" [(visible)]="agregar" [modal]="true" [style]="{width: '50vw'}" [maximizable]="true"
+            [draggable]="false" [resizable]="false">
+                <form [formGroup]="formMedico" (ngSubmit)="agregarMedico()">
+                    <div class="p-fluid p-grid">
+                        <br>
+                        <div class="p-field p-col-12 p-md-4">
+                            <span class="p-float-label">
+                                <input type="text" formControlName="nombre" id="inputtext" pInputText > 
+                                <label >Nombre</label>
+                            </span>
+                        </div>
+                        <br>
+                        <div class="p-field p-col-12 p-md-4">
+                            <span class="p-float-label">
+                                <input type="text" formControlName="apellido" id="inputtext" pInputText > 
+                                <label for="inputtext">Apellido</label>
+                            </span>
+                        </div>
+                        <br>
+                        <div class="p-field p-col-12 p-md-4">
+                            <span class="p-float-label">
+                                <input type="text" formControlName="genero" id="inputtext" pInputText > 
+                                <label for="inputtext">Genero</label>
+                            </span>
+                        </div>
+                        <br>
+                        <div class="p-field p-col-12 p-md-4">
+                            <span class="p-float-label">
+                                <input type="number" formControlName="numeroDocumento" id="inputtext" pInputText > 
+                                <label for="inputtext">Numero documento</label>
+                            </span>
+                        </div>
+                        <br>
+                        <div class="p-field p-col-12 p-md-4">
+                            <span class="p-float-label">
+                                <p-dropdown formControlName="especialidad" [options]="especialidades" [showClear]="true"></p-dropdown>
+                                <label for="inputtext">especialidad</label>
+                            </span>
+                        </div>
+                        <br>
+                        <div class="p-field p-col-12 p-md-4">
+                            <span class="p-float-label">
+                                <input type="text" formControlName="telefono" id="inputtext" pInputText> 
+                                <label for="inputtext">Telefono</label>
+                            </span>
+                        </div>
+                        <br>
+                        <div class="p-field p-col-12 p-md-4">
+                            <span class="p-float-label">
+                                <input type="text" formControlName="email" id="inputtext" pInputText> 
+                                <label for="inputtext">Email</label>
+                            </span>
+                        </div>
+                        <br>
+                        <div class="p-field p-col-12 p-md-4">
+                            <span class="p-float-label">
+                                <input type="text" formControlName="ips" id="inputtext" pInputText>
+                                <label for="inputtext">IPS</label>
+                            </span>
+                        </div>
+                        <br>
+                        <div class="p-field p-col-12 p-md-4">
+                            <label for="calendar">Fecha nacimiento</label>
+                            <span class="p-float-label">
+                                <p-calendar formControlName="fechaNacimiento" [inline]="true" [showWeek]="true"></p-calendar>
+                            </span>
+                        </div>
+                    </div> 
+                    <button pButton pRipple label="Save" icon="pi pi-check"></button>
+                </form>
+                <ng-template pTemplate="footer">
+                    <p-button icon="pi pi-times" (click)="agregar=false" label="Cerrar"></p-button>
+                </ng-template>
+            </p-dialog>
+        </ng-template>
+        <ng-template pTemplate="header" let-usuariosMedicos>
+            <tr>
+                <th>ID</th>
+                <th>DOCUMENTO</th>
+                <th>NOMBRE</th>
+                <th>APELLIDO</th>
+                <th>ESPECIALIDAD</th>
+                <th>GENERO</th>
+                <th>FECHA NACIMIENTO</th>
+                <th>EMAIL</th>
+                <th>TELEFONO</th>
+                <th>IPS</th>
+                <th></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-usuariosMedicos let-columns="columns">
+            <tr>
+                <td >{{usuariosMedicos.idMedico}}</td>
+                <td >{{usuariosMedicos.numeroDocumento}}</td>
+                <td >{{usuariosMedicos.nombre}}</td>
+                <td >{{usuariosMedicos.apellido}}</td>
+                <td >{{usuariosMedicos.especialidad}}</td>
+                <td >{{usuariosMedicos.genero}}</td>
+                <td >{{usuariosMedicos.fechaNacimiento | date:'dd-MM-yyyy'}}</td>
+                <td >{{usuariosMedicos.email}}</td>
+                <td >{{usuariosMedicos.telefono}}</td>
+                <td >{{usuariosMedicos.ips}}</td>
+                <td>
+                    <button pButton pRipple (click)="showBasicDialog2(usuariosMedicos)" type="button" icon="pi pi-user" class="p-button-rounded p-button-info"></button>
+                    <button pButton pRipple (click)="eliminarMedico(usuariosMedicos.idMedico)" type="button" icon="pi pi-times" class="p-button-rounded p-button-danger"></button>
+                </td>
+            </tr>
+            <p-dialog header="Medico: {{medico?.nombre}} {{medico?.apellido}}" [(visible)]="modificar" [modal]="true" [style]="{width: '50vw'}" [maximizable]="true"
+            [draggable]="false" [resizable]="false">
+                <form [formGroup]="formMedico" (ngSubmit)="actualizarMedico()" >
+                    <div class="p-fluid p-grid">
+                        <br>
+                        <div class="p-field p-col-12 p-md-4">
+                            <span class="p-float-label">
+                                <input type="text" formControlName="nombre" id="inputtext" pInputText value="{{medico?.nombre}}" > 
+                                <label >Nombre</label>
+                            </span>
+                        </div>
+                        <br>
+                        <div class="p-field p-col-12 p-md-4">
+                            <span class="p-float-label">
+                                <input type="text" formControlName="apellido" id="inputtext" value="{{medico?.apellido}}" pInputText > 
+                                <label for="inputtext">Apellido</label>
+                            </span>
+                        </div>
+                        <br>
+                        <div class="p-field p-col-12 p-md-4">
+                            <span class="p-float-label">
+                                <input type="text" formControlName="genero" id="inputtext" value="{{medico?.genero}}" pInputText > 
+                                <label for="inputtext">Genero</label>
+                            </span>
+                        </div>
+                        <br>
+                        <div class="p-field p-col-12 p-md-4">
+                            <span class="p-float-label">
+                                <input type="text" formControlName="numeroDocumento" id="inputtext" value="{{medico?.numeroDocumento}}" pInputText > 
+                                <label for="inputtext">Numero documento</label>
+                            </span>
+                        </div>
+                        <br>
+                        <div class="p-field p-col-12 p-md-4">
+                            <span class="p-float-label">
+                                <p-dropdown formControlName="especialidad" [options]="especialidades" [showClear]="true"></p-dropdown>
+                                <label for="inputtext">especialidad</label>
+                            </span>
+                        </div>
+                        <br>
+                        <div class="p-field p-col-12 p-md-4">
+                            <span class="p-float-label">
+                                <input type="text" formControlName="telefono" id="inputtext" value="{{medico?.telefono}}" pInputText> 
+                                <label for="inputtext">Telefono</label>
+                            </span>
+                        </div>
+                        <br>
+                        <div class="p-field p-col-12 p-md-4">
+                            <span class="p-float-label">
+                                <input type="text" formControlName="email" id="inputtext" value="{{medico?.email}}" pInputText> 
+                                <label for="inputtext">Email</label>
+                            </span>
+                        </div>
+                        <br>
+                        <div class="p-field p-col-12 p-md-4">
+                            <span class="p-float-label">
+                                <input type="text" formControlName="ips" id="inputtext" value="{{medico?.ips}}"pInputText>
+                                <label for="inputtext">IPS</label>
+                            </span>
+                        </div>
+                        <br>
+                        <div class="p-field p-col-12 p-md-4">
+                            <label for="calendar">Fecha nacimiento</label>
+                            <span class="p-float-label">
+                                <p-calendar formControlName="fechaNacimiento" [inline]="true" [showWeek]="true"></p-calendar>
+                            </span>
+                        </div>
+                    </div> 
+                    <button pButton pRipple label="Save" icon="pi pi-check" (click)="refresh()"></button>
+                </form>
+                <ng-template pTemplate="footer">
+                    
+                    <p-button icon="pi pi-times" (click)="modificar=false" label="Cerrar"></p-button>
+                </ng-template>
+            </p-dialog>
+        </ng-template>
+    </p-table>

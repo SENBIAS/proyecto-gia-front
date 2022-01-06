@@ -1,0 +1,37 @@
+
+<p-button label="Ver historia" (click)="buscarHistoria()"></p-button><br>
+
+Enfermedades paciente<br>
+<ng-template ngFor let-item [ngForOf]="enfermedadesPaciente" >
+    <li>{{item?.enfermedad}}</li>
+</ng-template>
+<p-accordion>
+    <p-accordionTab header="Agregar Enefermedad Paciente">
+      <app-enfermedad-paciente></app-enfermedad-paciente>
+    </p-accordionTab>
+</p-accordion>
+
+<hr>
+Enfermedades hereditarias<br>
+<ng-template ngFor let-item [ngForOf]="enfermedadHereditaria" >
+    <li>{{item?.enfermedad}} {{item?.parentescoFamiliar}}</li>
+</ng-template>
+
+<p-accordion>
+    <p-accordionTab header="Agregar Enfermedad Hereditaria">
+       <app-enfermedad-hereditaria></app-enfermedad-hereditaria>
+    </p-accordionTab>
+</p-accordion>
+
+<hr>
+Procedimientos realizados <br>
+<ng-template ngFor let-item [ngForOf]="procedimientos" >
+    <li>{{item?.descripcion}} {{item?.tipoProcedimiento}}</li>
+</ng-template>
+
+<p-accordion>
+    <p-accordionTab header="Agregar Procedimiento">
+       <app-procedimientos></app-procedimientos>
+    </p-accordionTab>
+</p-accordion>
+
